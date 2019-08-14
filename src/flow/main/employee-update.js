@@ -80,7 +80,11 @@ class EmployeeUpdate extends React.Component {
             }));
             this.props.fireEmployee(this.props.passedData.employeeID);
           }}
-          onCancel={() => {}}
+          onCancel={() => {
+            this.setState(() => ({
+              showConfirmDialog: false
+            }));
+          }}
           visible={this.state.showConfirmDialog}
           message="Are you sure you want to fire this employee?"
         />
