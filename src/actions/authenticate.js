@@ -55,4 +55,22 @@ const login = ({ email, password }) => {
   };
 };
 
-export { onEmailChange, onPasswordChange, login };
+const createAccount = ({ email, password }) => {
+  return dispath => {
+    dispath(onLoading(true));
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        dispath(onLoginSuccess(user));
+        dispath(onLoading(false));
+        Actions.main();
+      })
+      .catch(err => {
+        dispath(onLoginFail(err.message));
+        dispath(onLoading(false));
+      });
+  };
+};
+
+export { onEmailChange, onPasswordChange, login, createAccount };

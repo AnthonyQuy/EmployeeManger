@@ -4,15 +4,15 @@ import { AntButton } from "../../components/common/AntButton";
 import { AntViewGroup } from "../../components/common/AntViewGroup";
 import { AntView } from "../../components/common/AntView";
 import { Input } from "react-native-elements";
-import { onEmailChange, onPasswordChange, login } from "../../actions";
+import { onEmailChange, onPasswordChange, login, createAccount } from "../../actions";
 import { AntError } from "../../components/common/AntError";
 class LoginForm extends React.Component {
   render() {
     // console.log("LOGIN-FORM");
     // console.log(this.props);
     var { credential } = this.props;
-    credential.email = "test@test.com";
-    credential.password = "123qwe"
+    // credential.email = "test@test.com";
+    // credential.password = "123qwe"
     return (
       <AntViewGroup>
         <AntView>
@@ -44,6 +44,12 @@ class LoginForm extends React.Component {
           title={"Login"}
           onPress={() => this.props.login(credential)}
         />
+          <AntButton
+          loading={this.props.loading}
+          disabled={this.props.loading}
+          title={"Create Acount"}
+          onPress={() => this.props.createAccount(credential)}
+        />
       </AntViewGroup>
     );
   }
@@ -55,5 +61,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { onEmailChange, onPasswordChange, login }
+  { onEmailChange, onPasswordChange, login , createAccount}
 )(LoginForm);
